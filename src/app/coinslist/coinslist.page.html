@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title> <ion-icon name="ice-cream-outline"></ion-icon> Cryptos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar animated placeholder="Buscar crypto ..." (ionChange)="buscarCoin($event)"></ion-searchbar>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Consultando cryptos ...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+     
+      <ion-col sizeMd="4" offsetMd="4">
+        <ion-list>
+          <ion-item *ngFor="let coin of coins | filterCoin: textoBuscar" (click)="infoCrypto(coin)"> 
+            <ion-avatar slot="start">
+              <img src="{{coin.image}}">
+            </ion-avatar>
+            <ion-label>
+              <h3 class="title">{{coin.name}}</h3>
+              <p class="subtext">{{coin.symbol | uppercase}}</p>
+            </ion-label>
+            <ion-label>
+              <h5>{{coin.current_price.toString().replace('.', ',') + '€'}}</h5>
+            </ion-label>
+            <ion-label>
+              <p>{{coin.price_change_percentage_24h.toString().substring(0, 4).replace('.', ',') + '%'}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

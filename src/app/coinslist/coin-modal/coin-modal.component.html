@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start" >
+      <ion-icon  color="dark" (click)="closeModal()" size="large" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>{{data.name}} ({{data.symbol.toUpperCase()}})</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeMd="5" offsetMd="5">
+        <div >
+          <ion-card class="ion-text-center">
+            <ion-card-content>
+              <img src="{{data.image}}" alt="">
+              <ion-card-title>
+                <h3>
+                  <strong>Precio </strong>{{data.current_price.toString().replace('.', ',') + '€'}}
+                  <strong>24h </strong>{{data.price_change_percentage_24h.toString().substring(0, 4).replace('.', ',') + '%'}}
+                </h3>
+                <ion-list>
+                  <ion-item>
+                    <ion-range min="{{ data.low_24h.toString().replace('.', ',')" max="{{ data.high_24h.toString().replace('.', ',') }}" color="primary">
+                      <ion-label slot="start"> <strong>Min </strong>{{ data.low_24h.toString().replace('.', ',') + '€'}}</ion-label>
+                      <ion-label slot="end"> <strong>Max </strong>{{ data.high_24h.toString().replace('.', ',') + '€'}}</ion-label>
+                    </ion-range>
+                  </ion-item>
+                </ion-list>
+              </ion-card-title>
+              <ion-card-subtitle>
+                <ion-grid>
+         
+                  <ion-row>
+                    <ion-col class="ion-align-self-start">
+                      <strong>Cap. de mercado </strong>{{data.market_cap.toString().replace('.', ',')}} <br>
+                      <strong>Vol. 24 h </strong>{{ data.total_volume.toString().replace('.', ',') + '€'}} <br>
+                      <strong>Valoración tras la dilución total </strong>{{ data.fully_diluted_valuation.toString().replace('.', ',') + '€'}} <br>
+                    </ion-col>
+                    <ion-col class="ion-align-self-end">
+                      <strong>Cantidad circulante</strong> {{ data.circulating_supply.toString().replace('.', ',')}} <br>
+                      <strong>Total Supply</strong> {{ data.total_supply.toString().replace('.', ',') }} <br>
+                      <strong>Cantidad máx</strong> {{ data.max_supply.toString().replace('.', ',') }}
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+              </ion-card-subtitle>
+            </ion-card-content>
+          </ion-card>
+
+        
+          <ion-card class="ion-text-center">
+            <div>
+              <canvas id="coinsChart"></canvas>
+            </div>
+          </ion-card>
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
